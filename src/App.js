@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles.css";
+import { makeStyles } from "@material-ui/styles";
 import { useState } from "react";
 
 var musicLib = {
@@ -44,64 +45,78 @@ var musicLib = {
     { name: "Dil Ko Karar Aya", singer: "Yaseer Desai" }
   ]
 };
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: "100vh",
+    backgroundImage: `url(${"/img/dance-bg.jpg"})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    display: "block",
+    overflow: "hidden"
+  }
+}));
+
 export default function App() {
+  const classes = useStyles();
   const [selectedGenre, setGenre] = useState("Love");
   function genreClickHandler(genre) {
     setGenre(genre);
   }
   return (
-    <div className="App">
-      <h1 class="headi">Musify</h1>
-      <h3> Hey Music Lover! Choose Music According to your mood</h3>
-      <hr />
-      <div>
-        {Object.keys(musicLib).map((genre) => (
-          <button
-            onClick={() => genreClickHandler(genre)}
-            style={{
-              cursor: "pointer",
-              background: "#1db954",
-              color: "#191414",
-              borderRadius: "0.5rem",
-              padding: "0.5rem  1rem",
-              border: "1px solid black",
-              boxShadow: " 3px 5px 5px rgb(255, 255, 255, 0.2)",
-              margin: "1rem 0.3rem"
-            }}
-          >
-            {genre}
-          </button>
-        ))}
-        <div style={{ textAlign: "left" }}>
-          <ul style={{ paddingInlineStart: "0" }}>
-            {musicLib[selectedGenre].map((music) => (
-              <li
-                key={music.name}
-                style={{
-                  listStyle: "none",
-                  padding: "1rem",
-                  border: "1px solid #D1D5DB",
-                  width: "70%",
-                  margin: "1rem 0rem",
-                  borderRadius: "0.5rem",
-                  boxShadow: "10px 10px 5px rgb(255, 255, 255, 0.2)"
-                }}
-              >
-                {" "}
-                <div style={{ fontSize: "larger" }}> {music.name} </div>
-                <div
+    <div className={classes.root}>
+      <div className="App">
+        <h1 className="headi">Musify</h1>
+        <h3> Hey Music Lover! Choose Music According to your mood</h3>
+        <hr />
+        <div>
+          {Object.keys(musicLib).map((genre) => (
+            <button
+              onClick={() => genreClickHandler(genre)}
+              style={{
+                cursor: "pointer",
+                background: "#1db954",
+                color: "#191414",
+                borderRadius: "0.5rem",
+                padding: "0.5rem  1rem",
+                border: "1px solid black",
+                boxShadow: " 3px 5px 5px rgb(255, 255, 255, 0.2)",
+                margin: "1rem 0.3rem"
+              }}
+            >
+              {genre}
+            </button>
+          ))}
+          <div style={{ textAlign: "left" }}>
+            <ul style={{ paddingInlineStart: "0" }}>
+              {musicLib[selectedGenre].map((music) => (
+                <li
+                  key={music.name}
                   style={{
-                    fontSize: "smaller",
-                    color: "white",
-                    marginTop: "5px"
+                    listStyle: "none",
+                    padding: "1rem",
+                    border: "1px solid #D1D5DB",
+                    width: "70%",
+                    margin: "1rem 0rem",
+                    borderRadius: "0.5rem",
+                    boxShadow: "10px 10px 5px rgb(255, 255, 255, 0.2)"
                   }}
                 >
                   {" "}
-                  {music.singer}{" "}
-                </div>
-              </li>
-            ))}
-          </ul>
+                  <div style={{ fontSize: "larger" }}> {music.name} </div>
+                  <div
+                    style={{
+                      fontSize: "smaller",
+                      color: "white",
+                      marginTop: "5px"
+                    }}
+                  >
+                    {" "}
+                    {music.singer}{" "}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
