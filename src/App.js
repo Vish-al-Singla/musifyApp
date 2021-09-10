@@ -1,8 +1,10 @@
 import React from "react";
 import "./styles.css";
+import { motion } from "framer-motion";
 import { makeStyles } from "@material-ui/styles";
 import { useState } from "react";
-
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import { IconButton } from "@material-ui/core";
 var musicLib = {
   Happy: [
     { name: "Happy Together", singer: "The turtles" },
@@ -57,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function App() {
+  function playMusic(item) {}
   const classes = useStyles();
   const [selectedGenre, setGenre] = useState("Love");
   function genreClickHandler(genre) {
@@ -67,7 +70,7 @@ export default function App() {
       <div className="App">
         <h1 className="headi">Musify</h1>
         <h3> Hey Music Lover! Choose Music According to your mood</h3>
-        <hr />
+
         <div>
           {Object.keys(musicLib).map((genre) => (
             <button
@@ -86,6 +89,7 @@ export default function App() {
               {genre}
             </button>
           ))}
+          <hr />
           <div style={{ textAlign: "left" }}>
             <ul style={{ paddingInlineStart: "0" }}>
               {musicLib[selectedGenre].map((music) => (
@@ -111,8 +115,14 @@ export default function App() {
                     }}
                   >
                     {" "}
-                    {music.singer}{" "}
+                    {music.singer}
                   </div>
+                  <IconButton>
+                    <PlayCircleOutlineIcon
+                      className="play"
+                      onClick={playMusic}
+                    />
+                  </IconButton>
                 </li>
               ))}
             </ul>
